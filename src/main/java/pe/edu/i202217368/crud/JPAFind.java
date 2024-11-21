@@ -21,9 +21,16 @@ public class JPAFind {
             System.out.println("No se encontró el País");
         } else {
             List<City> cities = country.getCities();
-            cities.stream()
+            List<City> filteredCities = cities.stream()
                     .filter(city -> city.getPopulation() > 700000)
-                    .forEach(city -> System.out.println("Ciudad con mas de 700k de Personas del pais:"+ city.getCountry().getName() +" es :" + city.getName()));
+                    .toList(); // Recolectamos las ciudades filtradas
+
+            if (!filteredCities.isEmpty()) {
+                System.out.println("Ciudades con más de 700k de Personas del país: " + country.getName());
+                filteredCities.forEach(city -> System.out.println("- " + city.getName()));
+            } else {
+                System.out.println("No hay ciudades con más de 700k de personas en el país: " + country.getName());
+            }
         }
 
         em.close();

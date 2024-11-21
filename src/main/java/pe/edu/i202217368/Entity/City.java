@@ -53,8 +53,6 @@ public class City {
         Name = name;
     }
 
-
-
     public String getDistrict() {
         return District;
     }
